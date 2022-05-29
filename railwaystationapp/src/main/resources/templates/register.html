@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container d-flex justify-content-center" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="needs-validation" method="post" th:action="@{/register}" th:object="${signUpDto}" novalidate>
+            <h2 class="form-signin-heading d-flex justify-content-center" style="">Sign up</h2>
+
+            <div class="form-group">
+                <label><b>Prenume</b></label>
+                <input required minlength="2" th:field="*{firstname}" class="form-control"
+                       placeholder="Introduceti prenumele"/>
+                <div class="invalid-feedback">Prenumele trebuie sa aiba cel putin 2 caractere.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Nume</b></label>
+                <input required th:field="*{lastname}" class="form-control" placeholder="Introduceti numele"/>
+                <div class="invalid-feedback"> Numele de familie nu poate fi null.</div>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Username</b></label>
+                <input required minlength="4" th:field="*{username}" class="form-control" placeholder="Introduceti usernameul"/>
+                <div class="invalid-feedback">Usernameul trebuie sa aiba cel putin 4 caractere.</div>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Email</b></label>
+                <input required type="email" th:field="*{email}" class="form-control" placeholder="Introduceti emailul"/>
+                <div class="invalid-feedback">Adresa de email nu este valida. Introduceti o adresa de email valida.</div>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Parola</b></label>
+                <input required minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                       type="password" th:field="*{password}" class="form-control" placeholder="Introduceti parola"/>
+                <div class="invalid-feedback"> Parola trebuie sa aiba cel putin 8 caractere, dintre care cel putin o litera mica, o litera mare si o cifra.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Tipul utilizatorului</b></label>
+                <br>
+                <select class="form-select" id="userType" th:field="*{userType}" required>
+                    <option
+                            th:each="userTypeOpt:${T(com.awbdfirstproject.railwaystationapp.domain.UserType).values()}"
+                            th:value="${userTypeOpt}" th:text="${userTypeOpt.getDescription()}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="alert alert-danger" role="alert" th:if="${exception != null}" >
+                <p th:text="${exception.message}"/>
+            </div>
+
+
+            <button type="submit" class="btn btn-info btn-block">Submit</button>
+            <p class="forgot-password text-right">Ai cont? <a href="/login">Login</a></p>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

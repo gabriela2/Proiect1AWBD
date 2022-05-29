@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container d-flex justify-content-center" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="needs-validation" method="post" th:action="@{/admin/train/train-form}" th:object="${train}" novalidate>
+            <h2 class="form-signin-heading d-flex justify-content-center" style="">Adaugare tren</h2>
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label><b>Cod</b></label>
+                <input required maxlength="20" th:field="*{code}" class="form-control"
+                       placeholder="Introduceti codul trenului"/>
+                <div class="invalid-feedback">Codul trenului trebuie sa aiba cel mult 20 de caractere.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Numar de locuri</b></label>
+                <input required type="number" th:field="*{numberOfSeats}" class="form-control" min="1">
+                <div class="invalid-feedback"> Numarul de locuri trebuie sa fie minim 1.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Tipul trenului</b></label>
+                <br>
+                <select class="form-select" id="trainType" th:field="*{trainType}" required>
+                    <option
+                            th:each="trainTypeOpt:${T(com.awbdfirstproject.railwaystationapp.domain.TrainType).values()}"
+                            th:value="${trainTypeOpt}" th:text="${trainTypeOpt}">
+                    </option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Tipul combustibilului</b></label>
+                <br>
+                <select class="form-select" id="fuelType" th:field="*{fuelType}" required>
+                    <option
+                            th:each="fuelTypeOpt:${T(com.awbdfirstproject.railwaystationapp.domain.FuelType).values()}"
+                            th:value="${fuelTypeOpt}" th:text="${fuelTypeOpt}">
+                    </option>
+                </select>
+            </div>
+
+
+
+
+
+
+            <button type="submit" class="btn btn-info btn-block">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

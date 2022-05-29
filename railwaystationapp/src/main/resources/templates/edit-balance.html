@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Journey</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container" style="margin-top: 20px;">
+    <div class="mw-100 border border-info shadow p-4 mb-4 bg-white">
+        <h2> Adaugare bani</h2>
+        <form th:object="${balanceDto}" th:action="@{/profile/edit-balance}" th:method="post" >
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <label th:for="balance">Balanta</label>
+                        <input type="number" min="0"  step="0.1" class="form-control" th:field="*{balance}"/>
+                    </div>
+
+                    <hr>
+
+                    <div class="col-md-7 ml-md-auto">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+</body>
+</html>

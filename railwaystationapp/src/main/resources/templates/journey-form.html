@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container d-flex justify-content-center" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="needs-validation" method="post" th:action="@{/admin/journey/journey-form}" th:object="${journey}" novalidate>
+            <h2 class="form-signin-heading d-flex justify-content-center" style="">Adaugare calatorie</h2>
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{minuteLate}"/>
+
+            <div class="form-group">
+                <label><b>Statie plecare</b></label>
+                <br>
+                <select class="form-select" id="departureRailway" th:field="*{departureRailway}" required>
+                    <option
+                            th:each="railwaystation: ${railwaystations}"
+                            th:value="${railwaystation}" th:text="${railwaystation}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><b>Statie sosire</b></label>
+                <br>
+                <select class="form-select" id="arrivalRailway" th:field="*{arrivalRailway}" required>
+                    <option
+                            th:each="railwaystation: ${railwaystations}"
+                            th:value="${railwaystation}" th:text="${railwaystation}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><b>Distanta</b></label>
+                <input type="number" min="0"  th:field="*{distance}" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label><b>Statusul calatoriei</b></label>
+                <br>
+                <select class="form-select" id="railwayType" th:field="*{journeyStatus}" required>
+                    <option
+                            th:each="journeyStatusOpt:${T(com.awbdfirstproject.railwaystationapp.domain.JourneyStatus).values()}"
+                            th:value="${journeyStatusOpt}" th:text="${journeyStatusOpt}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><b>Plecare planificata la</b></label>
+                <input required th:field="*{departureTime}" class="form-control" placeholder="2030-06-06 12:00:00"/>
+                <div class="invalid-feedback">Timpul de plecare nu poate fi null.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Sosire planificata la</b></label>
+                <input required th:field="*{arrivalTime}" class="form-control" placeholder="2030-06-06 12:00:00"/>
+                <div class="invalid-feedback">Timpul de sosire nu poate fi null.</div>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Pret</b></label>
+                <input type="number" min="0" step="0.1"  th:field="*{ticketPrice}" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label><b>Trenul</b></label>
+                <br>
+                <select class="form-select" id="trainCode" th:field="*{trainCode}" required>
+                    <option
+                            th:each="train : ${trains}"
+                            th:value="${train}" th:text="${train}">
+                    </option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>Compania</b></label>
+                <br>
+                <select class="form-select" id="companyName" th:field="*{companyName}" required>
+                    <option
+                            th:each="company: ${companies}"
+                            th:value="${company}" th:text="${company}">
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

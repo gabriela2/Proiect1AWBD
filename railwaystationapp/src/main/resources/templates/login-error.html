@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container d-flex justify-content-center" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="form-signin" method="post" th:action="authUser">
+            <h2 class="form-signin-heading d-flex justify-content-center" style="">Sign in</h2>
+            <p class="text-danger text-center">Credentialele folosite pentru autentificare nu sunt corecte. Te rugam sa incerci din nou!</p>
+            <p> <b>Username or Email</b>
+            <label for="username" class="sr-only">Username or Email</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username sau email" required autofocus>
+            </p>
+
+            <p> <b>Password</b>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Parola" required>
+            </p>
+            <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
+            <p class="forgot-password text-right">Nu ai cont? <a href="/register">Register</a>
+            </p>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

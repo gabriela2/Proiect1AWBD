@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Journey</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container" style="margin-top: 20px;">
+    <div class="mw-100 border border-info shadow p-4 mb-4 bg-white">
+        <h2>Informatii personale
+            <a href="/profile/edit-profile"><span class="text-info"> <i class="fa fa-edit" style="font-size:24px"></i></span></a>
+        </h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Nume</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.lastname}"></p></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Prenume</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.firstname}"></p></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Username</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.username}"></p></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Email</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.email}"></p></div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Tip</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.userType.getDescription()}"></p></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h2> Informatii bancare<a href="/profile/edit-balance"> <span class="text-info"><i class="fa fa-edit" style="font-size:24px"></i></span></a></h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-5"><p class="mb-0"><b>Balanta</b></p></div>
+                    <div class="col-sm-7"><p class="text-muted mb-0" th:text="${user.balance}"></p></div>
+                </div>
+
+            </div>
+        </div>
+
+        <h2>Calatorii</h2>
+        <div class="card mb-4">
+            <table class="table table-hover ">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>ID</th>
+                    <th>Pret final</th>
+                    <th>Plecare</th>
+                    <th>Sosire</th>
+                    <th>Delete</th>
+                    <th>Incidente</th>
+                </tr>
+                </thead>
+                <tr th:each="ticket : ${tickes}">
+                    <td th:text="${ticket.id}"></td>
+                    <td th:text="${ticket.finalPrice}"></td>
+                    <td th:text="${ticket.journey.departureRailwayStation.name}+'-'+${ticket.journey.departureTime}"></td>
+                    <td th:text="${ticket.journey.arrivalRailwayStation.name}+'-'+${ticket.journey.arrivalTime}"></td>
+                    <td><a href="#" th:href="@{'/ticket/delete/' + ${ticket.id}}">Stergere</a></td>
+                    <td><a href="#" th:href="@{'/incident/user/' + ${ticket.user.id}+'/journey/'+${ticket.journey.id}}">Incidente</a></td>
+                </tr>
+
+            </table>
+
+
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

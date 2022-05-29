@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Journey</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<div class="container" style="margin-top: 20px;">
+
+
+    <div class="mw-100 border border-info shadow p-4 mb-4 bg-white">
+        <div class="ml-2">
+            <h4 th:text="${company.name}"></h4>
+            <h5 th:text="${company.identificationNumber}"></h5>
+            <div th:if="${company.image}">
+                <div class="col-md-6"> <img th:src="@{'/company/getimage/' + ${company.id}}" th:alt="${company.name}" width="200" height="200"> </div>
+            </div>
+            <div th:unless="${company.image}">
+                <img style="width: 100px; height: 100px" th:src="@{/images/noimageavailable.jpg}" />
+            </div>
+        </div>
+
+        <div th:if="${journeyPage.content.size()==0}" style="margin-top: 20px">
+            <h5 class="text-center"><b>Momentan nu exista nicio calatorie pentru companie.</b></h5>
+        </div>
+
+        <div th:each="journey : ${journeyPage.content}" style="margin-top: 20px">
+            <div class="card border-info mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="row">Plecare la</div>
+                            <h6 class="row text-body" th:text="${journey.departureTime}"></h6>
+                            <div class="row" th:text="${journey.departureRailwayStation.name}"></div>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-primary" th:text="'Tren:' +${journey.train.code}"></h6>
+                            <p th:text="'Operator: ' + ${journey.company.name}"></p>
+                            <p th:text="'Status: ' + ${journey.journeyStatus}"></p>
+                            <p th:text="'Pret: ' + ${journey.ticketPrice} + ' LEI'"></p>
+                            <p th:text="'Distanta: ' + ${journey.distance} + ' KM'"></p>
+                            <p class="text-danger" th:text="'Intarziere: ' + ${journey.minuteLate}+' minute'"></p>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="row">Sosire la</div>
+                            <h6 class="row text-body" th:text="${journey.arrivalTime}"></h6>
+                            <div class="row" th:text="${journey.arrivalRailwayStation.name}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row d-flex justify-content-center">
+            <div th:if="${journeyPage.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${#numbers.sequence(1,journeyPage.totalPages)}">
+                <a th:href="@{'/admin/journey/company/'+${company.id}(size=${journeyPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==journeyPage.number + 1} ? active" style="margin-left: 10px"></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

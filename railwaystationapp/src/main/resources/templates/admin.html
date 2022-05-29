@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container" style="margin-top: 50px;">
+    <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Admin Dashboard</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-info flex-shrink-0 me-3">
+                    <i class='fas fa-globe' style='font-size:36px;'></i>
+                </div>
+                <div>
+                    <h2>Dashboard companii</h2>
+                    <p>In cadrul acestui dashboard exista urmatoarele optiuni: adaugarea, editarea, stergerea si vizualizarea companiilor.</p>
+                    <a href="/admin/company" class="btn btn-info">Acceseaza</a>
+                </div>
+            </div>
+
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-info flex-shrink-0 me-3">
+                    <i class='fas fa-train' style='font-size:36px'></i>
+                </div>
+                <div>
+                    <h2>Dashboard trenuri</h2>
+                    <p>In cadrul acestui dashboard exista urmatoarele optiuni: adaugarea, editarea, stergerea si vizualizarea trenurilor.</p>
+                    <a href="/admin/train" class="btn btn-info">Acceseaza</a>
+                </div>
+            </div>
+
+
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-info flex-shrink-0 me-3">
+                    <i class='fas fa-archway' style='font-size:36px;'></i>
+                </div>
+                <div>
+                    <h2>Dashboard statii</h2>
+                    <p>In cadrul acestui dashboard exista urmatoarele optiuni: adaugarea, editarea, stergerea si vizualizarea statiilor.</p>
+                    <a href="/admin/railway-station" class="btn btn-info">Acceseaza</a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 d-flex justify-content-center">
+            <div>
+                <div class="icon-square bg-light text-info flex-shrink-0 me-3">
+                    <i class='fas fa-map-marked-alt' style='font-size:36px;'></i>
+                </div>
+                <div>
+                    <h2>Dashboard calatorii</h2>
+                    <p>In cadrul acestui dashboard exista urmatoarele optiuni: adaugarea, editarea, stergerea si vizualizarea calatoriilor.</p>
+                    <a href="/admin/journey" class="btn btn-info">Acceseaza</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="icon-square bg-light text-info flex-shrink-0 me-3">
+                    <i class='fas fa-bell' style='font-size:36px;'></i>
+                </div>
+                <div>
+                    <h2>Dashboard incidente</h2>
+                    <p>In cadrul acestui dashboard exista urmatoarele optiuni: actualizarea si vizualizarea incidentelor.</p>
+                    <a href="/admin/incident" class="btn btn-info">Acceseaza</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

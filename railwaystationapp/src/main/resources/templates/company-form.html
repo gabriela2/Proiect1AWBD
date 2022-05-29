@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container d-flex justify-content-center" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="needs-validation" method="post" th:action="@{/admin/company/company-form}" th:object="${company}" novalidate enctype="multipart/form-data">
+            <h2 class="form-signin-heading d-flex justify-content-center" style="">Adaugare companie</h2>
+
+            <div class="form-group">
+                <label><b>Nume</b></label>
+                <input required  th:field="*{name}" class="form-control"
+                       placeholder="Introduceti numele companiei"/>
+                <div class="invalid-feedback">Numele companiei nu poate fi null.</div>
+            </div>
+
+            <div class="form-group">
+                <label><b>Numar de identificare</b></label>
+                <input required maxlength="15" th:field="*{identificationNumber}" class="form-control" placeholder="Introduceti numarul de identificare al companiei"/>
+                <div class="invalid-feedback"> Numarul de identificare trebuie sa aiba cel mult 15 caractere.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Select Image File</label>
+                <input id="imagefile" name="imagefile" type="file" class="file">
+            </div>
+
+
+
+            <button type="submit" class="btn btn-info btn-block">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resource exception</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container" style="margin-top: 20px;">
+  <div class="mw-100 border border-info shadow p-4 mb-4 bg-white">
+    <div class="alert alert-info text-center text-primary font-weight-bold" role="alert" th:if="${exception != null}" >
+      <p th:text="${exception.message}"/>
+    </div>
+  </div>
+</div>
+</body>
+</html>

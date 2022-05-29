@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+
+<div class="container" style="margin-top: 50px;">
+    <h5 class="d-flex justify-content-center"><b>UNIVERSITATEA DIN BUCURESTI</b></h5>
+    <h5 class="d-flex justify-content-center"><b>Facultatea de Matematica si Informatica</b></h5>
+    <h5 class="d-flex justify-content-center" style="margin-bottom: 100px"><b>Specializarea: Baze de date si tehnologii software</b></h5>
+    <h3 class="d-flex justify-content-center">Aplicatii web pentru baze de date</h3>
+    <h3 class="d-flex justify-content-center">Railway Staion App</h3>
+    <span class="d-flex justify-content-center">
+        <img style="width: 400px; height: 200px" th:src="@{images/logo.jpg}" />
+    </span>
+    <div style="margin-left: 200px; margin-top: 100px">
+        <h5><b>PROFESOR COORDONATOR:</b> Iulia Teodora BANU DEMERGIAN</h5>
+        <h5><b>STUDENT:</b> Valeria Gabriela SPINU</h5>
+        <h5><b>GRUPA:</b> 405</h5>
+    </div>
+</div>
+</body>
+</html>
